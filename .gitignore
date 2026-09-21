@@ -1,0 +1,12 @@
+.DS_Store
+.venv/
+__pycache__/
+*.pyc
+.idea/
+.vscode/
+.env
+.env.*
+!.env.example
+*.pem
+credentials.json
+secrets/
