@@ -1,4 +1,4 @@
-# cursor_commands
+# cursor-commands
 
 Plain-Markdown **project slash commands** for [Cursor](https://cursor.com). Copy the templates you need into a product repo, fill the placeholders, and keep that filled copy local.
 
@@ -7,6 +7,15 @@ Cursor loads one file per command from `<project>/.cursor/commands/`. The filena
 This repository is prompts, not an application. Filled copies belong in the product and should stay gitignored there, because they name ports, fixtures, and probe recipes.
 
 License: [MIT](LICENSE).
+
+## Use cases
+
+- Start a repo and want the same backup, test, cleanup, and docs prompts without rewriting them.
+- Run a local confidence check before a release. `/pre-release` reports `pass`, `warning`, `failure`, or `skipped`. It does not tag or push.
+- Keep Docker and Streamlit restarts from pruning images, running `compose down`, or touching another project's port.
+- Copy a handful of representative source files out for review, without tests, fixtures, or docs.
+
+These templates assume a Python tree (`pytest`, and usually `ruff` / `black` / `mypy`) with optional Docker or Streamlit. If the product uses other tools, change the card commands. Do not leave the sample ports or fixture paths in place.
 
 ## Use in a project
 
@@ -27,8 +36,6 @@ Then:
 3. Paste those values into each command's **Project card** and replace every `__TOKEN__`. The token list is [commands/_placeholders.md](commands/_placeholders.md). A command with a leftover `__…__` is not ready.
 
 Skip files the product does not need. See below.
-
-These templates assume a Python tree (`pytest`, and usually `ruff` / `black` / `mypy`) with optional Docker or Streamlit. If the product uses other tools, change the card commands; do not leave sample ports or fixture paths in place.
 
 ## What to copy
 
@@ -80,3 +87,7 @@ Files whose names start with `_` are not slash commands.
 ## Related
 
 Cursor still loads `.cursor/commands/*.md`. These files are project commands, not user-global `~/.cursor/commands/`, and not Agent Skills.
+
+<p align="center">
+  <a href="https://ko-fi.com/C0C1XK8G" target="_blank" rel="noopener noreferrer"><img height="36" style="border:0;height:36px" src="https://storage.ko-fi.com/cdn/kofi6.png?v=6" alt="Buy Me a Coffee at ko-fi.com" /></a>
+</p>
