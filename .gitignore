@@ -10,3 +10,4 @@ __pycache__/
 *.pem
 credentials.json
 secrets/
+data/queue-state.json

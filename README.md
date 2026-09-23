@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="logo.png" alt="Cursor" width="160"/>
+</p>
+
 # cursor-commands
 
 Plain-Markdown **project slash commands** for [Cursor](https://cursor.com). Copy the templates you need into a product repo, fill the placeholders, and keep that filled copy local.
