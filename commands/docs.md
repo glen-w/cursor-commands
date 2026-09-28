@@ -48,18 +48,11 @@ Docs are structured into explicit layers:
 
 ---
 
-## 1. Classify docs and add headers
+## 1. Classify docs by role
 
-Ensure each core doc begins with:
+Map each core doc to CONTRACT / GUIDE / ARCHITECTURE / PRODUCT using the model above. Do **not** add `Type:` / `Authority:` headers to the files — keep ownership implicit via structure, titles, and cross-links.
 
-```text
-Type: CONTRACT | GUIDE | ARCHITECTURE | PRODUCT
-Authority: <what this doc owns / does not own>
-```
-
-**Exception:** `README.md` does **not** require `Type:` / `Authority:` headers. It should still behave as an entry guide: link to contracts, avoid duplicating normative rules.
-
-Apply or verify `__DOC_CONTRACTS__` plus user/dev guides, architecture, and product/roadmap notes.
+Apply or verify `__DOC_CONTRACTS__` plus user/dev guides, architecture, and product/roadmap notes. `README.md` stays an entry guide: link deeper, avoid duplicating normative rules.
 
 On greenfield with almost no docs: create a minimal set (`README.md` + one ARCHITECTURE + one CONTRACT) rather than a large doc tree.
 
