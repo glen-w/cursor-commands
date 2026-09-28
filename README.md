@@ -16,6 +16,7 @@ License: [MIT](LICENSE).
 
 - Start a repo and want the same backup, test, cleanup, and docs prompts without rewriting them.
 - Run a local confidence check before a release. `/pre-release` reports `pass`, `warning`, `failure`, or `skipped`. It does not tag or push.
+- Check a diff without the full harden path. `/light-test` runs the tests that cover the changed files and skips large fixtures, live models, and heavy extras.
 - Keep Docker and Streamlit restarts from pruning images, running `compose down`, or touching another project's port.
 - Copy a handful of representative source files out for review, without tests, fixtures, or docs.
 
@@ -48,6 +49,8 @@ Skip files the product does not need. See below.
 | [backup.md](commands/backup.md) | `/backup` | Code-only zip under the backup hub, plus a `custom-commands/` mirror | zip only |
 | [tests.md](commands/tests.md) | `/tests` | Review then expand the offline suite | tests-only (backup first) |
 | [deep-test.md](commands/deep-test.md) | `/deep-test` | After a plan: landing → tests → small/large/extra probes → pre-release | yes, targeted fixes |
+| [light-test.md](commands/light-test.md) | `/light-test` | Change set only: focused offline tests; no large, LLM, or heavy-dependency runs | yes, targeted fixes |
+| [watch.md](commands/watch.md) | `/watch` | Babysit a long run; fix/hang-recover; log under `assessments/` | yes, targeted fixes |
 | [pre-release.md](commands/pre-release.md) | `/pre-release` | Local confidence report | no (report only) |
 | [refactor.md](commands/refactor.md) | `/refactor` | Assessment; no code changes | no |
 | [export-exemplars.md](commands/export-exemplars.md) | `/export-exemplars` | Copy ≤10 representative files to `~/Desktop/<topic>/` | copy only |
@@ -68,10 +71,10 @@ These belong in every filled copy. Do not weaken them for one project.
 1. Resolve paths from `REPO_ROOT`. No `/Users/…` literals. Use `$HOME` / `$BACKUP_HUB`.
 2. Backup root defaults to `"$BACKUP_HUB/$(basename "$REPO_ROOT") backup"` with `$BACKUP_HUB=$HOME/Documents/code backups`. Sibling `"$REPO_ROOT backup"` only when the card sets `backup_hub: sibling`.
 3. Code-only zips. Include `.cursor/commands/` in the zip and mirror them to `"$BACKUP_ROOT/custom-commands/"`.
-4. Mutating commands run `/backup` first. Nested backups skip when `/deep-test` already ran it.
+4. Mutating commands run `/backup` first. Nested backups skip when `/deep-test` or `/light-test` already ran it.
 5. Artifact cleanup, `docker compose down`, and docker prune stay disabled.
 6. `/pre-release` is local confidence: `pass` / `warning` / `failure` / `skipped`. Never a silent pass. Never tag or push.
-7. Default tests stay fast and offline.
+7. Default tests stay fast and offline. `/light-test` stays on that path for the change set only: no large fixtures, live models, Docker, or heavy optional stacks.
 8. Do not publish, push, or tag unless the user explicitly asks.
 9. Secrets stay out of git and out of zips.
 

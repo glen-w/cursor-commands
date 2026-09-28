@@ -19,7 +19,7 @@ Execute from the workspace root.
 
 Before doing anything else, run the backup custom command (`# backup`). Wait for it to complete, then proceed.
 
-If this `# tests` run was invoked from `# deep-test` that already backed up, **skip** this step and note that in the summary.
+If this `# tests` run was invoked from `# deep-test` or `# light-test` that already backed up, **skip** this step and note that in the summary.
 
 ---
 

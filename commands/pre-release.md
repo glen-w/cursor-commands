@@ -52,7 +52,7 @@ Typical names (use what exists; do not invent):
 
 If the user has not already run `# backup` in this session, recommend running it. Backup failure is a **warning** for this local-confidence command (not a tag authority).
 
-Skip if `# deep-test` already backed up in this run.
+Skip if `# deep-test` or `# light-test` already backed up in this run.
 
 ---
 

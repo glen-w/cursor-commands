@@ -64,7 +64,7 @@ A new template earns a file only when it is clearly reusable across projects. Do
 ## Standing policies (do not weaken)
 
 1. No `/Users/…` literals. Backup root defaults to hub `"$BACKUP_HUB/$(basename "$REPO_ROOT") backup"` with `$BACKUP_HUB=$HOME/Documents/code backups`. Sibling `"$REPO_ROOT backup"` only when the card sets `backup_hub: sibling`.
-2. Mutating commands run `# backup` first. Nested backups skip when `# deep-test` already ran it.
+2. Mutating commands run `# backup` first. Nested backups skip when `# deep-test` or `# light-test` already ran it.
 3. Artifact cleanup, `docker compose down`, and docker prune stay disabled in templates.
 4. `# pre-release` is local confidence: `pass` / `warning` / `failure` / `skipped`. Never a silent pass. Never tag/push.
 5. Default tests stay fast and offline.

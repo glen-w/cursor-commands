@@ -20,7 +20,7 @@ After running, summarize issues found and confirm whether the workspace is clean
 
 Run `# backup`. Wait for it to complete, then proceed.
 
-Skip if `# deep-test` already backed up in this run.
+Skip if `# deep-test` or `# light-test` already backed up in this run.
 
 ---
 

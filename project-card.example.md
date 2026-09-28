@@ -31,6 +31,10 @@ doc_contracts:
 probe_small: run the happy path on the mini fixture, offline
 probe_large: run the same entrypoint on a real-sized local fixture the user names
 probe_extra: smoke the UI on ui_port; skip if there is no UI
+e2e_cmd: run the documented long entrypoint the user already started, or restart that same recipe
+resume_hint: continue if the tool resumes; otherwise restart e2e_cmd
+hang_quiet_minutes: 10
+assessment_dir: assessments/
 backup_hub: "$HOME/Documents/code backups"  # or sibling
 backup_excludes:
   - data
