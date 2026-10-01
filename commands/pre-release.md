@@ -1,4 +1,4 @@
-# Pre-Release Check (# pre-release)
+# Pre-Release Check (/pre-release)
 
 Local **developer-confidence** report for `__PROJECT__`. Execute from the workspace root.
 
@@ -10,6 +10,8 @@ Local **developer-confidence** report for `__PROJECT__`. Execute from the worksp
 | Default test command | `__DEFAULT_TEST_CMD__` |
 | Small fixture (output sanity) | `__SMALL_FIXTURE__` |
 | Package | `__PACKAGE__` / `__SRC_PACKAGE__` |
+
+**Other commands:** where this file says to run `/name`, read and follow `__COMMANDS_DIR__/name.md`. Do not assume one slash command can be invoked from inside another.
 
 ---
 
@@ -50,9 +52,9 @@ Typical names (use what exists; do not invent):
 
 ## 0. Optional backup
 
-If the user has not already run `# backup` in this session, recommend running it. Backup failure is a **warning** for this local-confidence command (not a tag authority).
+If the user has not already run `/backup` in this session, recommend running it. Backup failure is a **warning** for this local-confidence command (not a tag authority).
 
-Skip if `# deep-test` or `# light-test` already backed up in this run.
+Skip if `/deep-test` or `/light-test` already backed up in this run.
 
 ---
 
@@ -108,8 +110,8 @@ Compare this branch / dirty worktree against the base branch (or the session’s
 | Check | Pass when | Failure / warning |
 | --- | --- | --- |
 | Documented | Each new surface appears in the right doc layer | Undocumented user-visible knob → **failure**; minor index drift → **warning** |
-| `# backup` paths | Code/config/docs included; generated/runtime dirs excluded | New top-level code/doc path missing from backup includes → **failure** |
-| Restore / reopen | Persisted settings still load; commands restorable from `"$BACKUP_ROOT/custom-commands/"` (the hub or sibling root `# backup` just used) | Broken reopen → **failure** |
+| `/backup` paths | Code/config/docs included; generated/runtime dirs excluded | New top-level code/doc path missing from backup includes → **failure** |
+| Restore / reopen | Persisted settings still load; commands restorable from `"$BACKUP_ROOT/custom-commands/"` (the hub or sibling root `/backup` just used) | Broken reopen → **failure** |
 
 No new surfaces in the diff → **pass** (N/A).
 

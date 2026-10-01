@@ -1,4 +1,4 @@
-# Deep Test / Harden After Plan (# deep-test)
+# Deep Test / Harden After Plan (/deep-test)
 
 Probe and harden after a plan has been implemented. Verify the plan landed end-to-end, deepen tests, exercise real workloads (small / large / extra), then finish with a local pre-release confidence pass.
 
@@ -21,11 +21,13 @@ Do not publish, push, tag, or deploy unless explicitly instructed.
 | Large fixture | `__LARGE_FIXTURE_HINT__` |
 | Sibling ports never to touch | `__SIBLING_PORTS__` |
 
+**Other commands:** where this file says to run `/name`, read and follow `__COMMANDS_DIR__/name.md`. Do not assume one slash command can be invoked from inside another.
+
 ---
 
 ## Inputs (resolve before starting)
 
-1. **Plan** (required): the plan just implemented — attached Cursor plan, linked plan file, or a path the user names. If none is clear, ask once, then stop.
+1. **Plan** (required): the plan just implemented — the plan from this session (plan-mode output, linked plan file, or a path the user names). If none is clear, ask once, then stop.
 2. **Small fixture** (default): `__SMALL_FIXTURE__`.
 3. **Large workload** (default preference order): path the user names; then `__LARGE_FIXTURE_HINT__`; if none exists, stop and ask — do not invent a synthetic “large” by duplicating the mini fixture.
 4. Record which mode/flags/modules were used. Prefer offline / mocked dependencies unless the plan under test requires a live service **and** that service is available.
@@ -34,9 +36,9 @@ Do not publish, push, tag, or deploy unless explicitly instructed.
 
 ## 0. Run backup first (mandatory)
 
-Run `# backup`. Wait for it to complete, then proceed.
+Run `/backup`. Wait for it to complete, then proceed.
 
-When later executing `# tests` and `# pre-release`, **skip their nested backup steps** if backup already succeeded in this deep-test run (note that in the summary).
+When later executing `/tests` and `/pre-release`, **skip their nested backup steps** if backup already succeeded in this deep-test run (note that in the summary).
 
 ---
 
@@ -51,7 +53,7 @@ For every plan phase / todo / acceptance criterion:
 | Code landed | Locate symbols/files named in the plan; confirm behavior matches the written decision |
 | Tests landed | Confirm planned tests exist and cover the stated cases |
 | Docs landed | Confirm planned doc updates exist and match code |
-| Docs + backup/restore | New features, output artifacts, or settings are documented and covered by `# backup` include/exclude |
+| Docs + backup/restore | New features, output artifacts, or settings are documented and covered by `/backup` include/exclude |
 | Explicit non-goals | Confirm out-of-scope items were not accidentally implemented |
 | Contracts / schemas | Confirm versioned artifacts and invariants match the plan |
 
@@ -65,17 +67,17 @@ Do not proceed to §2 until every **required** plan item is landed or explicitly
 
 ---
 
-## 2. Run `# tests` — expand and deepen (mandatory)
+## 2. Run `/tests` — expand and deepen (mandatory)
 
-Execute `# tests` in full (except skip backup if already done in §0).
+Execute `/tests` in full (except skip backup if already done in §0).
 
-Emphasis on top of `# tests`:
+Emphasis on top of `/tests`:
 
 - Prefer expansion around **code touched by the plan**.
 - Keep the default suite fast/offline; do not re-enable quarantined tests without justification.
 - Baseline must be green (or failures classified) before expansion; after expansion, `__DEFAULT_TEST_CMD__` must pass.
 
-If `# tests` surfaces production bugs related to the plan, fix them, then continue.
+If `/tests` surfaces production bugs related to the plan, fix them, then continue.
 
 ---
 
@@ -115,9 +117,9 @@ If the extra surface is unavailable (no Docker, no UI extra): mark `skipped (not
 
 ---
 
-## 6. Run `# pre-release` (mandatory)
+## 6. Run `/pre-release` (mandatory)
 
-Execute `# pre-release` in full (except skip nested backup if §0 already succeeded).
+Execute `/pre-release` in full (except skip nested backup if §0 already succeeded).
 
 - Treat failures related to this plan’s surface as **blockers to fix now** when safe and in-scope.
 - Do not tag/push/publish.
@@ -140,9 +142,9 @@ Execute `# pre-release` in full (except skip nested backup if §0 already succee
 ## Final summary (required)
 
 1. **Plan landing** — table: landed / fixed during deep-test / waived / still open
-2. **Tests (`# tests`)** — suite result; what was expanded
+2. **Tests (`/tests`)** — suite result; what was expanded
 3. **Probes** — small / large / extra: success / skipped, paths, issues fixed
-4. **Pre-release (`# pre-release`)** — `CONFIDENT` / `NEEDS FIXES` / `HIGH RISK` (not a release approval)
+4. **Pre-release (`/pre-release`)** — `CONFIDENT` / `NEEDS FIXES` / `HIGH RISK` (not a release approval)
 5. **Overall verdict** — `HARDENED` / `NEEDS FIXES` / `BLOCKED`
 
 Also list `git diff --stat` for changes made during this run.

@@ -1,6 +1,6 @@
-# Light Test on the Change Set (# light-test)
+# Light Test on the Change Set (/light-test)
 
-Narrow sibling of `# deep-test`. Check **what changed**, fix failures on that path, and stay fast and offline.
+Narrow sibling of `/deep-test`. Check **what changed**, fix failures on that path, and stay fast and offline.
 
 Execute from the workspace root.
 
@@ -8,7 +8,7 @@ This command is **mutating when fixing issues** found in the selected tests or t
 
 Do not publish, push, tag, or deploy unless explicitly instructed.
 
-This is **not** a substitute for `# deep-test`. It does not land a plan, expand the suite, run a large workload, exercise extra surfaces, or finish with `# pre-release`.
+This is **not** a substitute for `/deep-test`. It does not land a plan, expand the suite, run a large workload, exercise extra surfaces, or finish with `/pre-release`.
 
 ## Project card (fill before first use)
 
@@ -21,17 +21,19 @@ This is **not** a substitute for `# deep-test`. It does not land a plan, expand 
 | Small fixture | `__SMALL_FIXTURE__` |
 | Sibling ports never to touch | `__SIBLING_PORTS__` |
 
+**Other commands:** where this file says to run `/name`, read and follow `__COMMANDS_DIR__/name.md`. Do not assume one slash command can be invoked from inside another.
+
 ---
 
 ## Out of scope (do not run)
 
 - The full `__DEFAULT_TEST_CMD__` when that command walks the whole tree
-- `# tests` (review and expansion of the suite)
-- `# pre-release` (packaging, Docker, hygiene scripts, release confidence)
+- `/tests` (review and expansion of the suite)
+- `/pre-release` (packaging, Docker, hygiene scripts, release confidence)
 - Large-fixture and extra probes (real-sized workloads, UI, resume, compose)
 - Live models, LLM APIs, embedding or weight downloads, GPU jobs
 - Network, Docker build / up / down / prune, or any install of optional heavy extras
-- `# watch`, and any job that sits for many minutes
+- `/watch`, and any job that sits for many minutes
 
 If the only way to exercise a change is one of the above, mark that part `skipped (heavy)` and say why. Do not install the missing stack to make it runnable.
 
@@ -51,9 +53,9 @@ If the only way to exercise a change is one of the above, mark that part `skippe
 
 ## 0. Run backup first (mandatory)
 
-Run `# backup`. Wait for it to complete, then proceed.
+Run `/backup`. Wait for it to complete, then proceed.
 
-This command does not call `# tests` or `# pre-release`. If a later step in the same session does, skip that command's nested backup and note it.
+This command does not call `/tests` or `/pre-release`. If a later step in the same session does, skip that command's nested backup and note it.
 
 ---
 
@@ -79,7 +81,7 @@ Search with the module path. Do not add the rest of `tests/`.
 
 If a file mixes light and heavy cases, run only the light node ids. If every covering test is heavy, report `skipped (heavy)` for that changed file. Do not `pip install` the extra.
 
-When a changed behavior has **no** light test, add one small deterministic test (`tmp_path`, no network, no model, no extra install). One focused test is enough. Do not start a `# tests` expansion.
+When a changed behavior has **no** light test, add one small deterministic test (`tmp_path`, no network, no model, no extra install). One focused test is enough. Do not start a `/tests` expansion.
 
 ---
 
@@ -126,7 +128,7 @@ On failure of a probe you did run: diagnose, apply a minimal fix, re-run it.
 
 - Order is §0 → §1 → §2 → §3. Do not skip ahead to a broader command.
 - Work from the workspace root.
-- Stay on the change set. A green subset is the goal; a green whole tree is `# deep-test`.
+- Stay on the change set. A green subset is the goal; a green whole tree is `/deep-test`.
 - Do not delete run artifacts. Cleanup, `docker compose down`, and docker prune stay disabled.
 - After any fix, re-run the smallest failing test or probe before finishing.
 

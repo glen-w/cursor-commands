@@ -1,4 +1,4 @@
-# Dockerfile efficiency (# dockerfile-efficiency)
+# Dockerfile efficiency (/dockerfile-efficiency)
 
 Assess and improve Docker image size and build hygiene using a structured diagnosis and checklist. Do not change behavior; focus on size and hygiene.
 
@@ -14,11 +14,13 @@ If no Dockerfile exists yet, summarize that Docker packaging is out of scope for
 | Data / model dirs to keep out of layers | `__BACKUP_EXCLUDES__` plus `models/`, caches |
 | Notes | Do not bake Ollama/GGUF/vision/Whisper weights into the app image |
 
+**Other commands:** where this file says to run `/name`, read and follow `__COMMANDS_DIR__/name.md`. Do not assume one slash command can be invoked from inside another.
+
 ---
 
 ## 0. Run backup first (mandatory)
 
-Run `# backup`. Wait for it to complete, then proceed.
+Run `/backup`. Wait for it to complete, then proceed.
 
 ---
 

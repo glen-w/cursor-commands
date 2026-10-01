@@ -1,13 +1,14 @@
 # Project card (example)
 
-Fill one of these when instantiating templates into a project. Paste the values into each command's **Project card** section (commands must stay self-contained — Cursor injects only the command file).
+Fill one of these when instantiating templates into a project. Paste the values into each command's **Project card** section (commands must stay self-contained — the agent is given only the command file).
 
-Copy this file into the consuming repo as `.cursor/project-card.md` if you want a single place to edit later; slash commands still need the values inlined.
+Copy this file into the consuming repo beside the commands directory (`.cursor/project-card.md` or `.claude/project-card.md`) if you want a single place to edit later; slash commands still need the values inlined.
 
 Values below are illustrative. Replace every one. `backup_hub: sibling` is the only special case; any other hub value is a parent directory, not a `/Users/…` path.
 
 ```yaml
 project: Example
+commands_dir: .cursor/commands   # or .claude/commands
 package: example
 src_package: src/example
 ui_kind: streamlit          # streamlit | flask | none
@@ -46,7 +47,7 @@ verify_paths:
   - tests
   - pyproject.toml
   - docs
-  - .cursor/commands
+  - .cursor/commands        # same value as commands_dir
 staging_prefix: example-backup
 ```
 

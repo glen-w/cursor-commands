@@ -1,4 +1,4 @@
-# Workspace Cleanup & Quality Pass (# cleanup)
+# Workspace Cleanup & Quality Pass (/cleanup)
 
 Run a code quality and hygiene pass to ensure the codebase is clean, consistent, and type-safe.
 Execute from the workspace root.
@@ -14,13 +14,15 @@ After running, summarize issues found and confirm whether the workspace is clean
 | Types | `mypy src/` |
 | Safe scratch dirs (preview-only) | project output / test-output dirs — never repo root or `src/` |
 
+**Other commands:** where this file says to run `/name`, read and follow `__COMMANDS_DIR__/name.md`. Do not assume one slash command can be invoked from inside another.
+
 ---
 
 ## 0. Run backup first (mandatory)
 
-Run `# backup`. Wait for it to complete, then proceed.
+Run `/backup`. Wait for it to complete, then proceed.
 
-Skip if `# deep-test` or `# light-test` already backed up in this run.
+Skip if `/deep-test` or `/light-test` already backed up in this run.
 
 ---
 

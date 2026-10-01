@@ -1,4 +1,4 @@
-# Review and Expand Test Suite (# tests)
+# Review and Expand Test Suite (/tests)
 
 Review the `__PROJECT__` test suite for health and coverage gaps; then propose and, where safe, implement targeted test expansions.
 
@@ -13,13 +13,15 @@ Execute from the workspace root.
 | High-leverage areas | `__HIGH_LEVERAGE_TESTS__` |
 | Package under test | `__SRC_PACKAGE__` |
 
+**Other commands:** where this file says to run `/name`, read and follow `__COMMANDS_DIR__/name.md`. Do not assume one slash command can be invoked from inside another.
+
 ---
 
 ## 0. Run backup first (mandatory)
 
-Before doing anything else, run the backup custom command (`# backup`). Wait for it to complete, then proceed.
+Before doing anything else, run the backup custom command (`/backup`). Wait for it to complete, then proceed.
 
-If this `# tests` run was invoked from `# deep-test` or `# light-test` that already backed up, **skip** this step and note that in the summary.
+If this `/tests` run was invoked from `/deep-test` or `/light-test` that already backed up, **skip** this step and note that in the summary.
 
 ---
 

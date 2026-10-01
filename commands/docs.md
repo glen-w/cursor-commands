@@ -1,4 +1,4 @@
-# Documentation Maintenance (# docs)
+# Documentation Maintenance (/docs)
 
 Refactor and update project documentation so it matches the current codebase and the documentation architecture.
 
@@ -38,7 +38,7 @@ Docs are structured into explicit layers:
 - Do not document speculative or unsupported surfaces as shipped behavior.
 - Shipped delivery history belongs under `docs/archive/` with an **Archived / superseded** banner.
 
-### Lint rules (must fail `# docs`)
+### Lint rules (must fail `/docs`)
 
 - **Concept uniqueness:** fail if the same core concept is normatively defined in more than one CONTRACT doc.
 - **GUIDEs:** fail if any GUIDE contains “must”, “required”, or “invariant” language that defines behavior instead of summarizing a CONTRACT doc.

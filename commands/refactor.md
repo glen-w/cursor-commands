@@ -1,4 +1,4 @@
-# Refactor Assessment (# refactor)
+# Refactor Assessment (/refactor)
 
 Analyze the codebase (or specified module) to identify where refactoring may be needed.
 Do not change code. This is an assessment and planning pass only.

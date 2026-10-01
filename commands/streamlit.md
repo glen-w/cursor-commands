@@ -1,10 +1,12 @@
-# Restart Streamlit app (# streamlit)
+# Restart Streamlit app (/streamlit)
 
 Kill any `__PROJECT__` Streamlit (or documented UI) process on **port `__UI_PORT__`** and start the project UI.
 
 Skip this command when `__UI_KIND__` is `none`. If `__UI_KIND__` is `flask` (or similar), adapt the start command to `__UI_ENTRY__` but keep the same port and sibling-port rules.
 
 Execute from the workspace root.
+
+**Local sessions only.** This command assumes the user's own machine: it kills and starts a process on a loopback port. In a cloud or remote sandbox, report `skipped (not a local session)` and stop.
 
 ## Project card (fill before first use)
 

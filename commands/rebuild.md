@@ -1,9 +1,11 @@
-# Docker rebuild (# rebuild)
+# Docker rebuild (/rebuild)
 
 Rebuild the image and launch using docker compose — **only when this repo has Docker packaging**.
 Execute from the workspace root.
 
-If there is no `Dockerfile` / `docker-compose.yml` (greenfield / local-venv-only), report that and stop after optional `# backup`; do not invent Docker assets unless the user asked.
+If there is no `Dockerfile` / `docker-compose.yml` (greenfield / local-venv-only), report that and stop after optional `/backup`; do not invent Docker assets unless the user asked.
+
+**Local sessions only.** This command assumes the user's own machine: it builds and launches on the local Docker daemon. In a cloud or remote sandbox, report `skipped (not a local session)` and stop.
 
 ## Project card (fill before first use)
 
@@ -14,11 +16,13 @@ If there is no `Dockerfile` / `docker-compose.yml` (greenfield / local-venv-only
 | Sibling ports never to touch | `__SIBLING_PORTS__` |
 | Notes | Do not bake model weights into the image |
 
+**Other commands:** where this file says to run `/name`, read and follow `__COMMANDS_DIR__/name.md`. Do not assume one slash command can be invoked from inside another.
+
 ---
 
 ## 0. Run backup first (mandatory)
 
-Run `# backup`. Wait for it to complete, then proceed.
+Run `/backup`. Wait for it to complete, then proceed.
 
 ---
 

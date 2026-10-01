@@ -1,4 +1,4 @@
-# Export Exemplars (# export-exemplars)
+# Export Exemplars (/export-exemplars)
 
 Find the 10 most representative substantive functional-code files in the workspace about a given topic and copy them (flat, no subfolders) into a new folder on the Desktop named after the topic. If no topic is given, use the plan or topic currently under discussion.
 
@@ -9,6 +9,8 @@ Examples:
 
 Execute from the workspace root. The topic is everything after "export-exemplars" in the user's message, when present.
 
+**Local sessions only.** This command assumes the user's own machine: it copies files to the Desktop. In a cloud or remote sandbox, report `skipped (not a local session)` and stop.
+
 This command is already project-agnostic. No project card.
 
 ---
@@ -17,7 +19,7 @@ This command is already project-agnostic. No project card.
 
 - If the user supplied a topic phrase (e.g. "docker setup", "authentication", "API rate limiting"), use that exactly.
 - If the topic is empty or missing, **do not ask** — infer it from the current conversation:
-  1. Prefer the active/confirmed plan title or plan file name under discussion (e.g. Cursor plan for the task being implemented).
+  1. Prefer the active/confirmed plan title or plan file name under discussion (e.g. the agent's plan for the task being implemented).
   2. Otherwise use the main topic of the latest substantive thread (feature, bugfix, or refactor under discussion).
   3. Derive a short Desktop folder name from that plan/topic (plain words, spaces allowed; e.g. "per-segment audio playback").
   4. Briefly state the inferred topic in the summary so the user can see what was assumed.
@@ -28,7 +30,7 @@ This command is already project-agnostic. No project card.
 
 ## 2. Find representative files
 
-- Use **semantic search** (and optionally grep for filenames) to find files that best illustrate the topic.
+- Use the agent's code search (semantic when available, otherwise grep and glob) to find files that best illustrate the topic.
 - Run multiple targeted searches if needed (e.g. "Where is Docker configured?" "How is the Docker image built?" "docker-compose setup") to get good coverage.
 - From the combined results, **choose the 10 most representative files**:
   - Include only substantive functional code that directly implements the topic.

@@ -1,12 +1,15 @@
-<p align="center">
-  <img src="logo.png" alt="Cursor" width="160"/>
-</p>
+# agent-commands
 
-# cursor-commands
+Plain-Markdown **project slash commands** for coding agents. The same files run in [Cursor](https://cursor.com) and [Claude Code](https://code.claude.com). Copy the templates you need into a product repo, fill the placeholders, and keep that filled copy local.
 
-Plain-Markdown **project slash commands** for [Cursor](https://cursor.com). Copy the templates you need into a product repo, fill the placeholders, and keep that filled copy local.
+Each platform loads one file per command from a project directory. The filename is the slash name (`backup.md` → `/backup`).
 
-Cursor loads one file per command from `<project>/.cursor/commands/`. The filename is the slash name (`backup.md` → `/backup`). There is no YAML frontmatter: Cursor injects the whole file as the prompt, so each command carries its own project card.
+| Platform | Commands directory | Project card | `.gitignore` line |
+| --- | --- | --- | --- |
+| Cursor | `.cursor/commands/` | `.cursor/project-card.md` | `.cursor/commands/` |
+| Claude Code | `.claude/commands/` | `.claude/project-card.md` | `.claude/commands/` |
+
+The file is the same on both platforms. Only the directory differs. There is no YAML frontmatter: the agent is given the whole file as the prompt, so each command carries its own project card.
 
 This repository is prompts, not an application. Filled copies belong in the product and should stay gitignored there, because they name ports, fixtures, and probe recipes.
 
@@ -24,23 +27,25 @@ These templates assume a Python tree (`pytest`, and usually `ruff` / `black` / `
 
 ## Use in a project
 
-From this repo:
+From this repo, with `DEST` set to the commands directory for your platform:
 
 ```bash
-mkdir -p /path/to/project/.cursor/commands
-find commands -maxdepth 1 -name '*.md' ! -name '_*' \
-  -exec cp {} /path/to/project/.cursor/commands/ \;
+DEST=/path/to/project/.cursor/commands    # or /path/to/project/.claude/commands
+mkdir -p "$DEST"
+find commands -maxdepth 1 -name '*.md' ! -name '_*' -exec cp {} "$DEST/" \;
 ```
 
-Or open this repo in Cursor and run `/instantiate`, pointing at the product checkout.
+Or open this repo in Cursor or Claude Code and run `/instantiate`, pointing at the product checkout.
 
 Then:
 
-1. Add `.cursor/commands/` to the product `.gitignore` if it is not already ignored.
-2. Copy [project-card.example.md](project-card.example.md) into the product as `.cursor/project-card.md` and replace the sample values.
-3. Paste those values into each command's **Project card** and replace every `__TOKEN__`. The token list is [commands/_placeholders.md](commands/_placeholders.md). A command with a leftover `__…__` is not ready.
+1. Add the platform's `.gitignore` line from the table above to the product, if it is not already ignored.
+2. Copy [project-card.example.md](project-card.example.md) into the product at the card path from the table and replace the sample values.
+3. Paste those values into each command's **Project card** and replace every `__TOKEN__`. Set `__COMMANDS_DIR__` to the commands directory, without a trailing slash (`.cursor/commands` or `.claude/commands`). The token list is [commands/_placeholders.md](commands/_placeholders.md). A command with a leftover `__…__` is not ready.
 
 Skip files the product does not need. See below.
+
+`/backup` writes outside the project (to the backup hub) and `/export-exemplars` writes to the Desktop. Claude Code asks for permission the first time each does so.
 
 ## What to copy
 
@@ -70,13 +75,14 @@ These belong in every filled copy. Do not weaken them for one project.
 
 1. Resolve paths from `REPO_ROOT`. No `/Users/…` literals. Use `$HOME` / `$BACKUP_HUB`.
 2. Backup root defaults to `"$BACKUP_HUB/$(basename "$REPO_ROOT") backup"` with `$BACKUP_HUB=$HOME/Documents/code backups`. Sibling `"$REPO_ROOT backup"` only when the card sets `backup_hub: sibling`.
-3. Code-only zips. Include `.cursor/commands/` in the zip and mirror them to `"$BACKUP_ROOT/custom-commands/"`.
+3. Code-only zips. Include the commands directory in the zip and mirror it to `"$BACKUP_ROOT/custom-commands/"`.
 4. Mutating commands run `/backup` first. Nested backups skip when `/deep-test` or `/light-test` already ran it.
 5. Artifact cleanup, `docker compose down`, and docker prune stay disabled.
 6. `/pre-release` is local confidence: `pass` / `warning` / `failure` / `skipped`. Never a silent pass. Never tag or push.
 7. Default tests stay fast and offline. `/light-test` stays on that path for the change set only: no large fixtures, live models, Docker, or heavy optional stacks.
 8. Do not publish, push, or tag unless the user explicitly asks.
 9. Secrets stay out of git and out of zips.
+10. `/backup`, `/export-exemplars`, `/streamlit`, `/rebuild`, and `/watch` are local-session commands. In a cloud or remote sandbox they report `skipped (not a local session)`. A command that needed the backup then asks the user before its first mutating step.
 
 ## Layout
 
@@ -84,8 +90,9 @@ These belong in every filled copy. Do not weaken them for one project.
 commands/                 templates (copy these)
   _placeholders.md        token list; do not copy
 .cursor/commands/         /instantiate for this repo only
+.claude/commands/         the same /instantiate, for Claude Code
 project-card.example.md   example card
-AGENTS.md                 agent instructions for this repo
+AGENTS.md                 agent instructions for this repo, including the instantiate procedure
 LICENSE
 ```
 
@@ -93,7 +100,9 @@ Files whose names start with `_` are not slash commands.
 
 ## Related
 
-Cursor still loads `.cursor/commands/*.md`. These files are project commands, not user-global `~/.cursor/commands/`, and not Agent Skills.
+These files are project commands. They are not user-global commands (`~/.cursor/commands/`, `~/.claude/commands/`) and not Agent Skills.
+
+Cursor and Claude Code both still load command files and both now recommend skills for new work. A skills output generated at instantiate time, which would also reach Codex, Gemini CLI, and GitHub Copilot, is a planned follow-up. See [the multi-platform assessment](assessments/2026-10-01-multi-platform-assessment.md).
 
 <p align="center">
   <a href="https://ko-fi.com/C0C1XK8G" target="_blank" rel="noopener noreferrer"><img height="36" style="border:0;height:36px" src="https://storage.ko-fi.com/cdn/kofi6.png?v=6" alt="Buy Me a Coffee at ko-fi.com" /></a>
